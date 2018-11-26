@@ -1,0 +1,94 @@
+package com.timbuchalka;
+
+import java.util.Scanner;
+
+public class Main {
+private static Scanner scanner = new Scanner(System.in);
+private static MobilePhone mobilePhone = new MobilePhone();
+    public static void main(String[] args) {
+        boolean quit = false;
+
+        while (!quit) {
+            mobilePhone.Instruction();
+            int number = scanner.nextInt();
+            scanner.nextLine();
+            switch (number) {
+                case 1:
+                    AddContact();
+                    break;
+                case 2:
+                    mobilePhone.PrintListofContact();
+                    break;
+                case 3:
+                    UpdateContacts();
+                    break;
+                case 4:
+                    RemoveContact();
+                    break;
+                case 5:
+                    SerchContact();
+                    break;
+                case 6:
+                    quit = true;
+                    break;
+            }
+
+        }
+        System.out.println("Turning off");
+    }
+    private static void AddContact(){
+        System.out.println("Pleas Enter the Name of the contact You wonne Add ");
+        String Name= scanner.nextLine();
+        if(mobilePhone.getoPosition(Name)<0){
+            System.out.println("now add the number ");
+            String Number= scanner.nextLine();
+        mobilePhone.AddContact(Name,Number);
+    }
+    else{
+            System.out.println("u allready have " + Name + "in your phone");
+        }
+    }
+    private static void RemoveContact(){
+        System.out.println("Pleas Enter the Name of the contact You wonne Remove ");
+        String Name= scanner.nextLine();
+        if(mobilePhone.getoPosition(Name)>=0){
+            mobilePhone.removeContacs(Name);
+        }
+    else{
+            System.out.println("Ther is no " + Name + "in your phone");
+        }
+    }
+    private  static void SerchContact(){
+        System.out.println("Pleas Enter the Name of the contact You wonne Serch ");
+        String Name= scanner.nextLine();
+        if(mobilePhone.getoPosition(Name)>=0){
+            System.out.println(Name + " Was founded ");
+        }
+    else{
+            System.out.println("Ther is no " + Name + "in your phone");
+        }
+    }
+    private static void UpdateContacts(){
+        System.out.println("Pleas Enter the Name of the contact You wonne Change ");
+        String PreviousName= scanner.nextLine();
+        if(mobilePhone.getoPosition(PreviousName)>=0){
+            System.out.println("Pleas Enter the Name of the contact You wonne Add ");
+            String Name= scanner.nextLine();
+            if(mobilePhone.getoPosition(Name)<0) {
+
+                System.out.println("now add the number ");
+                String Number = scanner.nextLine();
+                mobilePhone.UpdateContacts(PreviousName, Name, Number);
+            }
+            else {
+                System.out.println("u allready have " + Name + "in your phone");
+            }
+        }
+        else{
+            System.out.println("Ther is no " + PreviousName + " in your phone");
+        }
+
+    }
+
+    }
+
