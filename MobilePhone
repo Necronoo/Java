@@ -1,0 +1,62 @@
+package com.timbuchalka;
+
+import java.util.ArrayList;
+
+public class MobilePhone {
+    ArrayList<Contacts> contacts = new ArrayList<Contacts>();
+
+    public void AddContact(String Name, String PhoneNumber){
+contacts.add(new Contacts(Name,PhoneNumber));
+    }
+public void PrintListofContact(){
+    System.out.println( "Accualy you have got "+ contacts.size() + " saved contacs");
+    for(int i =0; i<contacts.size(); i++){
+        System.out.println( (i+1) + " Contacs Name : "+ contacts.get(i).getName()+
+         "  Number : "+ contacts.get(i).getPhoneNumber());
+
+    }
+
+}
+public void UpdateContacts(String PreviousName, String NewName, String NewNumber){
+        int position = getoPosition(PreviousName);
+            contacts.set(position, new Contacts(NewName, NewNumber));
+        }
+
+
+public int getoPosition(String Name){
+for(int i =0; i<contacts.size();i++) {
+    if (Name.equals( contacts.get(i).getName())) {
+        return i;
+    }
+}
+    return -1;
+
+}
+
+
+public boolean serchContacs (String Name){
+    int position = getoPosition(Name);
+    if(position>=0){
+        return true;
+    }
+    else{
+        return false;
+        }
+}
+
+public void removeContacs(String Name){
+    int position = getoPosition(Name);
+contacts.remove(position);
+
+}
+public void Instruction(){
+    System.out.println();
+    System.out.println("Press 1 to Add The contact");
+    System.out.println("Press 2 to Print List of contact ");
+    System.out.println("Press 3 to Update the contact");
+    System.out.println("Press 4 to Delate the contact");
+    System.out.println("Przess 5 to Serch the contact");
+    System.out.println("Przess 6 to Quit");
+}
+
+}
